@@ -1,0 +1,222 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0a1420;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  color: #e8dcc0;
+  user-select: none;
+}
+
+#game-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#ui-root {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#ui-root > * {
+  pointer-events: auto;
+}
+
+#loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a1420;
+  z-index: 100;
+}
+
+.loading-text {
+  font-size: 22px;
+  letter-spacing: 4px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ---------- HUD ---------- */
+.hud-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: linear-gradient(rgba(6, 12, 22, 0.75), transparent);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.hud-top .hud-group {
+  display: flex;
+  gap: 18px;
+}
+
+.hud-panel {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  background: rgba(10, 18, 32, 0.78);
+  border: 1px solid rgba(232, 220, 192, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.7;
+  min-width: 170px;
+  pointer-events: none;
+}
+
+.hud-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  background: rgba(10, 18, 32, 0.85);
+  border: 1px solid rgba(232, 220, 192, 0.4);
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 17px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hud-label {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  font-size: 13px;
+  color: #ffe9a8;
+  text-shadow: 0 1px 3px #000;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ---------- 通用菜单/面板 ---------- */
+.panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(14, 22, 38, 0.96);
+  border: 2px solid rgba(232, 220, 192, 0.45);
+  border-radius: 10px;
+  padding: 22px 26px;
+  min-width: 520px;
+  max-width: 80vw;
+  max-height: 82vh;
+  overflow: auto;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+.panel h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+  color: #ffd97a;
+  border-bottom: 1px solid rgba(232, 220, 192, 0.25);
+  padding-bottom: 8px;
+}
+
+.panel .close-tip {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #9aa4b8;
+  text-align: right;
+}
+
+table.goods {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table.goods th,
+table.goods td {
+  padding: 6px 8px;
+  text-align: right;
+  border-bottom: 1px solid rgba(232, 220, 192, 0.12);
+}
+
+table.goods th:first-child,
+table.goods td:first-child {
+  text-align: left;
+}
+
+table.goods tr:hover td {
+  background: rgba(255, 217, 122, 0.08);
+}
+
+button.btn {
+  background: #2a3a5c;
+  color: #e8dcc0;
+  border: 1px solid rgba(232, 220, 192, 0.4);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button.btn:hover:not(:disabled) {
+  background: #3a5078;
+}
+
+button.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  padding: 10px 16px;
+  background: rgba(42, 58, 92, 0.5);
+  border: 1px solid rgba(232, 220, 192, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.menu-item:hover {
+  background: rgba(58, 80, 120, 0.8);
+}
+
+.toast {
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 30, 50, 0.92);
+  border: 1px solid rgba(255, 217, 122, 0.5);
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 15px;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}

@@ -1,0 +1,10 @@
+[
+  { "id": "latin", "name": "拉丁帆船", "price": 800, "baseSpeed": 1.8, "cargoCap": 40, "crewMin": 8, "crewMax": 20, "durability": 50, "cannons": 4 },
+  { "id": "caravela", "name": "卡拉维尔帆船", "price": 2500, "baseSpeed": 2.2, "cargoCap": 80, "crewMin": 12, "crewMax": 30, "durability": 80, "cannons": 8 },
+  { "id": "nao", "name": "瑙船", "price": 6000, "baseSpeed": 2.0, "cargoCap": 160, "crewMin": 18, "crewMax": 45, "durability": 120, "cannons": 12 },
+  { "id": "carrack", "name": "卡拉克帆船", "price": 12000, "baseSpeed": 2.1, "cargoCap": 260, "crewMin": 25, "crewMax": 60, "durability": 160, "cannons": 20 },
+  { "id": "xebec", "name": "排桨帆船", "price": 15000, "baseSpeed": 2.8, "cargoCap": 140, "crewMin": 30, "crewMax": 70, "durability": 130, "cannons": 16 },
+  { "id": "frigate", "name": "护卫舰", "price": 28000, "baseSpeed": 2.6, "cargoCap": 220, "crewMin": 35, "crewMax": 80, "durability": 200, "cannons": 32 },
+  { "id": "galleon", "name": "盖伦帆船", "price": 45000, "baseSpeed": 2.4, "cargoCap": 400, "crewMin": 45, "crewMax": 110, "durability": 280, "cannons": 44 },
+  { "id": "clipper", "name": "飞剪船", "price": 60000, "baseSpeed": 3.4, "cargoCap": 300, "crewMin": 30, "crewMax": 70, "durability": 180, "cannons": 20 }
+]
