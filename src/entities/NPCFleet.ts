@@ -72,8 +72,15 @@ export class NPCFleet {
       d.heading = wrapAngle(d.heading + Math.max(-1, Math.min(1, diff)) * 0.9 * dt);
     }
     const speed = 1.5;
-    d.x = wrapX(d.x + Math.cos(d.heading) * speed * dt);
-    d.z += Math.sin(d.heading) * speed * dt;
+    const nx = wrapX(d.x + Math.cos(d.heading) * speed * dt);
+    const nz = d.z + Math.sin(d.heading) * speed * dt;
+    // 船身不下水不上岸：新位置是陆地则只转向不移动
+    if (!this.world.isLand(nx, nz)) {
+      d.x = nx;
+      d.z = nz;
+    } else {
+      d.heading = wrapAngle(d.heading + 2.0 * dt);
+    }
 
     this.mesh.position.set(d.x, Math.sin(performance.now() * 0.0013 + d.x) * 0.07, d.z);
     this.mesh.rotation.y = Math.atan2(Math.cos(d.heading), Math.sin(d.heading));

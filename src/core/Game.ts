@@ -10,6 +10,7 @@ import { PortScene, type BuildingDef } from '../scenes/PortScene';
 import { BattleScene, type BattleResult } from '../scenes/BattleScene';
 import type { NPCFleet } from '../entities/NPCFleet';
 import { GOODS, addCargo, cargoCapacity, cargoTotal } from '../systems/Economy';
+import { Cheat } from '../systems/Cheat';
 import { createMarketUI } from '../ui/MarketUI';
 import { createShipyardUI } from '../ui/ShipyardUI';
 import { createTavernUI } from '../ui/TavernUI';
@@ -48,6 +49,12 @@ export class Game {
 
     this.worldScene = new WorldScene(this, topo);
     this.scenes.change(this.worldScene);
+
+    // 秘籍：show me the money
+    new Cheat(() => {
+      this.state.money += 999999;
+      this.hud.toast('💰 秘籍生效：获得 999999 金币！', 4);
+    });
   }
 
   start(): void {

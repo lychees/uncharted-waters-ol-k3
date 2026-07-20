@@ -219,22 +219,32 @@ export class WorldScene implements GameScene {
     this.updatePortLabels();
   }
 
+  /** 船体采样：新中心 + 船头都在水面才可通行（不查船尾，避免贴岸时死锁） */
+  private canSail(x: number, z: number, heading: number): boolean {
+    if (Math.abs(z) >= 88) return false;
+    const bow = 1.2;
+    return (
+      !this.world.isLand(x, z) &&
+      !this.world.isLand(x + Math.cos(heading) * bow, z + Math.sin(heading) * bow)
+    );
+  }
+
   private moveWithCollision(st: { x: number; z: number; heading: number }, dist: number): void {
     const dx = Math.cos(st.heading) * dist;
     const dz = Math.sin(st.heading) * dist;
-    const nx = st.x + dx;
-    const nz = st.z + dz;
-    // 船头采样点
-    const bow = 1.2;
-    const bx = nx + Math.cos(st.heading) * bow;
-    const bz = nz + Math.sin(st.heading) * bow;
-    if (!this.world.isLand(bx, bz) && Math.abs(bz) < 88) {
-      st.x = wrapX(nx);
-      st.z = nz;
-    } else if (!this.world.isLand(nx + Math.cos(st.heading) * bow, st.z)) {
-      st.x = wrapX(nx); // 沿 x 滑动
-    } else if (!this.world.isLand(st.x, nz + Math.sin(st.heading) * bow)) {
-      st.z = nz; // 沿 z 滑动
+    // 已在陆地中（异常情况）→ 允许任何移动以脱困
+    if (this.world.isLand(st.x, st.z)) {
+      st.x = wrapX(st.x + dx);
+      st.z += dz;
+      return;
+    }
+    if (this.canSail(st.x + dx, st.z + dz, st.heading)) {
+      st.x = wrapX(st.x + dx);
+      st.z += dz;
+    } else if (this.canSail(st.x + dx, st.z, st.heading)) {
+      st.x = wrapX(st.x + dx); // 沿 x 滑动
+    } else if (this.canSail(st.x, st.z + dz, st.heading)) {
+      st.z += dz; // 沿 z 滑动
     }
   }
 
